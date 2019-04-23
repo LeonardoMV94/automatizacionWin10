@@ -1,10 +1,10 @@
 @echo off
 :inicio
 cls
-echo.
-echo Script para respaldo, restauracion de drivers de Windows
-echo Incluye vista de licencias y BIOS
-echo.
+echo ###
+echo Script para automatizacion de procesos en Soporte informatico
+echo creado por Leonardo MV
+echo ####
 SET var=0
 echo  [1]    Respaldar drivers   
 echo  [2]    Restaurar copia de drivers
@@ -14,7 +14,9 @@ echo  [5]    Ver BIOS
 echo  [6]    Ver Licencia de windows
 echo  [7]    Informacion completa de SO
 echo  [8]    Ver clave wifi
-echo  [9]    Salir
+echo  [9]	 Desactivar Windows Defender
+echo  [10]	 Activar Windows Defender
+echo  [11]   Salir
 SET /p var= ^> Seleccione una opcion [1-9]: 
 cls
 echo.
@@ -27,6 +29,8 @@ if %var%==6 goto op6
 if %var%==7 goto op7
 if %var%==8 goto op8
 if %var%==9 goto op9
+if %var%==10 goto op10
+if %var%==11 goto op11
 :op1
 echo.
 echo Se creara la carpeta "Drivers" en carpeta raiz
@@ -112,6 +116,20 @@ netsh WLAN show profile name="%var1%" key=clear >> %USERPROFILE%\Desktop\info.tx
 pause
 goto inicio
 :op9
+cls
+echo copia y pega en powershell para desactivar
+start powershell
+echo Set-MpPreference -DisableRealtimeMonitoring $true; exit
+pause
+goto inicio
+:op10
+cls
+echo copia y pega en powershell para activar
+start powershell
+echo Set-MpPreference -DisableRealtimeMonitoring $false; exit
+pause
+goto inicio
+:op11
 cls
 echo Pulsa una tecla para salir 
 pause>nul
